@@ -98,7 +98,7 @@ services:
     environment:
       - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
     volumes:
-      - ${SERVER_DATA}/config/caddy:/etc/caddy:ro
+      - ${SERVER_CONFIG}/config/caddy:/etc/caddy:ro
       - ${SERVER_DATA}/caddy/data:/data
       - ${SERVER_DATA}/caddy/config:/config
     networks:
