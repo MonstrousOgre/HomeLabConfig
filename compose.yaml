@@ -35,7 +35,7 @@ services:
   #   networks:
   #     - karakeep
   #     - cloudflare-public
-  #   
+  #
 
   # # The browser service used for crawling and screenshotting pages
   # chrome:
@@ -69,8 +69,6 @@ services:
     #   - "${LD_HOST_PORT:-9090}:9090"
     volumes:
       - "${LD_HOST_DATA_DIR:-${SERVER_DATA}/linkding}:/etc/linkding/data"
-    env_file:
-      - .env
     restart: unless-stopped
     networks:
       - cloudflare-public
@@ -215,8 +213,8 @@ services:
       - ${SERVER_DATA}/forgejo:/data
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - '3000:3000'
-      - '2222:22'
+      - "3000:3000"
+      - "2222:22"
   # clipcascade:
   #   image: sathvikrao/clipcascade:latest
   #   # ports:
