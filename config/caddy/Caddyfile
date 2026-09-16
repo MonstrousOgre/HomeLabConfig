@@ -1,0 +1,22 @@
+{
+	acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+}
+
+http://*.kashlab.net {
+	redir https://{host}:8443{uri} permanent
+}
+
+git.kashlab.net {
+	tls {
+		dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+	}
+	reverse_proxy forgejo:3000
+}
+
+services.kashlab.net {
+	tls {
+		dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+	}
+	reverse_proxy portainer:9000
+}
+
