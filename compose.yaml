@@ -2,7 +2,7 @@ name: kashlab
 
 services:
   portainer:
-    container_name: portainer
+    # container_name: portainer
     image: portainer/portainer-ce:lts
     restart: always
     volumes:
@@ -63,7 +63,7 @@ services:
   #     - karakeep
 
   linkding:
-    container_name: "${LD_CONTAINER_NAME:-linkding}"
+    # container_name: "${LD_CONTAINER_NAME:-linkding}"
     image: sissbruecker/linkding:latest
     # ports:
     #   - "${LD_HOST_PORT:-9090}:9090"
@@ -173,7 +173,7 @@ services:
   #     - wallabag
   readeck:
     image: codeberg.org/readeck/readeck:latest
-    container_name: readeck
+    # container_name: readeck
     # ports:
     #   - 8000:8000
     environment:
@@ -201,7 +201,7 @@ services:
       retries: 3
   forgejo:
     image: codeberg.org/forgejo/forgejo:16
-    container_name: forgejo
+    # container_name: forgejo
     environment:
       - USER_UID=1000
       - USER_GID=1000
