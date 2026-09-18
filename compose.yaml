@@ -98,7 +98,8 @@ services:
     environment:
       - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
     volumes:
-      - ${SERVER_CONFIG}/config/caddy:/etc/caddy:ro
+      # - ${SERVER_CONFIG}/config/caddy:/etc/caddy:ro
+      - ./config/caddy:/etc/caddy:ro
       - ${SERVER_DATA}/caddy/data:/data
       - ${SERVER_DATA}/caddy/config:/config
     networks:
@@ -237,7 +238,8 @@ services:
     # ports:
     #   - 3000:3000
     volumes:
-      - ${SERVER_CONFIG}/config/homepage:/app/config # Make sure your local config directory exists
+      - ./config/homepage:/app/config # Make sure your local config directory exists
+      - ${SERVER_DATA}/homepage/logs:/logs
       # - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
     environment:
       HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS} # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
