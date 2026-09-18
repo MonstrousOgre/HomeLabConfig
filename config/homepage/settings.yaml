@@ -6,4 +6,10 @@ providers:
   openweathermap: openweathermapapikey
   weatherapi: weatherapiapikey
 
+title: Welcome to the Kash Lab
+
+description: A personal home lab project developed by Kash
+
 logpath: /logs
+
+background: https://raw.githubusercontent.com/MonstrousOgre/dotfiles/refs/heads/master/.local/share/wallpapers/wallhaven-yqg6r7.jpg
