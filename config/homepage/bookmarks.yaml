@@ -1,0 +1,17 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/configs/bookmarks
+
+- Public:
+    - Productivity:
+        - Bookmarks:
+            - abbr: LD
+              href: https://linkding.kashlab.net/
+        - Read-it-later:
+            - abbr: R
+              href: https://Readeck.kashlab.net/
+
+- Private:
+    - Git:
+        - abbr: G
+          href: https://git.kashlab.net:8443/
