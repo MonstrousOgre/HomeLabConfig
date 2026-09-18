@@ -13,3 +13,5 @@ description: A personal home lab project developed by Kash
 logpath: /logs
 
 background: https://raw.githubusercontent.com/MonstrousOgre/dotfiles/refs/heads/master/.local/share/wallpapers/wallhaven-yqg6r7.jpg
+
+cardBlur: xs # xs, md, etc... see https://tailwindcss.com/docs/backdrop-blur
