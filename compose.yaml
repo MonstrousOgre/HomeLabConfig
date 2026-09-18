@@ -241,19 +241,37 @@ services:
       - cloudflare-public
     environment:
       HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS} # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
-  stump:
-    image: aaronleopold/stump:latest
-    container_name: stump
+  # stump:
+  #   image: aaronleopold/stump:latest
+  #   container_name: stump
+  #   environment:
+  #     PUID: 1000
+  #     PGID: 1000
+  #     STUMP_CONFIG_DIR: /config
+  #
+  #     STUMP_ENABLE_UPLOAD: true
+  #
+  #   volumes:
+  #     - ${SERVER_DATA}/stump:/config
+  #     - ${SERVER_RESOURCES}/library:/data
+  #   networks:
+  #     - cloudflare-public
+  #   restart: unless-stopped
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web
     environment:
-      PUID: 1000
-      PGID: 1000
-      STUMP_CONFIG_DIR: /config
-
-      STUMP_ENABLE_UPLOAD: true
-
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      # - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
     volumes:
-      - ${SERVER_DATA}/stump:/config
-      - ${SERVER_RESOURCES}/library:/data
+      - ${SERVER_DATA}/calibre-web/config:/config
+      - ${SERVER_DATA}/calibre-web/library:/books
+      - ${SERVER_RESOURCES}/library:/library
+    # ports:
+    #   - 8083:8083
     networks:
       - cloudflare-public
     restart: unless-stopped
