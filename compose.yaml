@@ -237,7 +237,7 @@ services:
     # ports:
     #   - 3000:3000
     volumes:
-      - ${SERVER_DATA}/homepage:/app/config # Make sure your local config directory exists
+      - ${SERVER_CONFIG}/config/homepage:/app/config # Make sure your local config directory exists
       # - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
     environment:
       HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS} # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
