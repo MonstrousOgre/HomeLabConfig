@@ -12,6 +12,13 @@ description: A personal home lab project developed by Kash
 
 logpath: /logs
 
-background: https://raw.githubusercontent.com/MonstrousOgre/dotfiles/refs/heads/master/.local/share/wallpapers/wallhaven-yqg6r7.jpg
-
-cardBlur: xs # xs, md, etc... see https://tailwindcss.com/docs/backdrop-blur
+# background: https://raw.githubusercontent.com/MonstrousOgre/dotfiles/refs/heads/master/.local/share/wallpapers/wallhaven-yqg6r7.jpg
+#
+# cardBlur: xs # xs, md, etc... see https://tailwindcss.com/docs/backdrop-blur
+#
+background:
+  image: https://raw.githubusercontent.com/MonstrousOgre/dotfiles/refs/heads/master/.local/share/wallpapers/wallhaven-yqg6r7.jpg
+  blur: sm # sm, "", md, xl... see https://tailwindcss.com/docs/backdrop-blur
+  saturate: 50 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
+  brightness: 50 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
+  opacity: 50 # 0-100
