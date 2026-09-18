@@ -12,11 +12,8 @@ services:
       - 9000:9000
       - 9443:9443
       # - 8000:8000  # Remove if you do not intend to use Edge Agents
-    # profiles:
-    #   - bootstrap
     networks:
       - caddy-private
-      # - caddy-proxy
 
   # karakeep:
   #   image: ghcr.io/karakeep-app/karakeep:release
@@ -104,7 +101,6 @@ services:
       - ${SERVER_DATA}/caddy/config:/config
     networks:
       - caddy-private
-      # - caddy-proxy
 
   # wallabag:
   #   image: wallabag/wallabag
@@ -245,6 +241,22 @@ services:
       - cloudflare-public
     environment:
       HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS} # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
+  stump:
+    image: aaronleopold/stump:latest
+    container_name: stump
+    environment:
+      PUID: 1000
+      PGID: 1000
+      STUMP_CONFIG_DIR: /config
+
+      STUMP_ENABLE_UPLOAD: true
+
+    volumes:
+      - ${SERVER_DATA}/stump:/config
+      - ${SERVER_RESOURCES}/library:/data
+    networks:
+      - cloudflare-public
+    restart: unless-stopped
 
 networks:
   karakeep:
@@ -257,6 +269,3 @@ networks:
     name: forgejo
   caddy-private:
     name: caddy-private
-  # caddy-proxy:
-  #   name: caddy-proxy
-  #   external: true
