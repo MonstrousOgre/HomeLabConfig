@@ -2,17 +2,16 @@
 # For configuration options and examples, please see:
 # https://gethomepage.dev/configs/services/
 
-- My First Group:
-    - My First Service:
-        href: http://localhost/
-        description: Homepage is awesome
+- Public Services:
+    - Bookmarks:
+        href: https://bookmarks.kashlab.net/
+        description: Bookmark manager for the Kash Lab
 
-- My Second Group:
-    - My Second Service:
-        href: http://localhost/
-        description: Homepage is the best
+    - Read-it-later:
+        href: https://read.kashlab.net/
+        description: Allows you to save articles and read them later
 
-- My Third Group:
-    - My Third Service:
-        href: http://localhost/
-        description: Homepage is 😎
+- Private Services:
+    - Git:
+        href: https://git.kashlab.net:8443/
+        description: Git forge for the Kash Lab
