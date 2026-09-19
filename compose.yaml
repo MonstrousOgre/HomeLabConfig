@@ -15,51 +15,6 @@ services:
     networks:
       - caddy-private
 
-  # karakeep:
-  #   image: ghcr.io/karakeep-app/karakeep:release
-  #   restart: unless-stopped
-
-  #   volumes:
-  #     - ${SERVER_DATA}/karakeep:/data
-
-  #   # ports:
-  #   #   - "3000:3000"
-
-  #   environment:
-  #     DATA_DIR: /data
-  #     # MEILI_ADDR: http://meilisearch:7700
-  #     # BROWSER_WEB_URL: http://chrome:9222
-  #     NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
-  #   networks:
-  #     - karakeep
-  #     - cloudflare-public
-  #
-
-  # # The browser service used for crawling and screenshotting pages
-  # chrome:
-  #   image: ghcr.io/karakeep-app/karakeep-chrome:release
-  #   restart: unless-stopped
-  #   # Required by headless Chrome to prevent crashes on large pages
-  #   init: true
-  #   command:
-  #     - --disable-gpu
-  #     - --disable-dev-shm-usage
-  #     - --hide-scrollbars
-  #     - --disable-blink-features=AutomationControlled
-  #     - --window-size=1440,900
-  #   profiles:
-  #     - crawling
-  #   networks:
-  #     - karakeep
-
-  # meilisearch:
-  #   image: getmeili/meilisearch:latest # Adjust version as needed
-  #   restart: unless-stopped
-  #   profiles:
-  #     - crawling
-  #   networks:
-  #     - karakeep
-
   linkding:
     # container_name: "${LD_CONTAINER_NAME:-linkding}"
     image: sissbruecker/linkding:latest
@@ -81,6 +36,7 @@ services:
       - ${CLOUDFLARE_TOKEN}
     networks:
       - cloudflare-public
+
   caddy:
     # build:
     #   context: .
@@ -102,74 +58,6 @@ services:
     networks:
       - caddy-private
 
-  # wallabag:
-  #   image: wallabag/wallabag
-  #   restart: unless-stopped
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: ${WALLABAG_DB_ROOT_PASSWORD}
-
-  #     SYMFONY__ENV__DATABASE_DRIVER: pdo_mysql
-  #     SYMFONY__ENV__DATABASE_HOST: wallabag-db
-  #     SYMFONY__ENV__DATABASE_PORT: 3306
-  #     SYMFONY__ENV__DATABASE_NAME: wallabag
-  #     SYMFONY__ENV__DATABASE_USER: wallabag
-  #     SYMFONY__ENV__DATABASE_PASSWORD: ${WALLABAG_DB_PASSWORD}
-  #     SYMFONY__ENV__DATABASE_CHARSET: utf8mb4
-  #     SYMFONY__ENV__DATABASE_TABLE_PREFIX: wallabag_
-
-  #     SYMFONY__ENV__DOMAIN_NAME: ${WALLABAG_DOMAIN}
-  #     SYMFONY__ENV__SERVER_NAME: ${WALLABAG_SERVER_NAME}
-
-  #     SYMFONY__ENV__MAILER_DSN: smtp://127.0.0.1
-  #     SYMFONY__ENV__FROM_EMAIL: ${WALLABAG_FROM_EMAIL}
-
-  #     SYMFONY__ENV__REDIS_HOST: wallabag-redis
-  #     SYMFONY__ENV__REDIS_PORT: 6379
-
-  #   volumes:
-  #     - ${SERVER_DATA}/wallabag/images:/var/www/wallabag/web/assets/images
-
-  #   depends_on:
-  #     wallabag-db:
-  #       condition: service_healthy
-  #     wallabag-redis:
-  #       condition: service_healthy
-
-  #   networks:
-  #     - wallabag
-  #     - cloudflare-public
-
-  # wallabag-db:
-  #   image: mariadb
-  #   restart: unless-stopped
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: ${WALLABAG_DB_ROOT_PASSWORD}
-  #   volumes:
-  #     - ${SERVER_DATA}/wallabag-db:/var/lib/mysql
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - /usr/local/bin/healthcheck.sh
-  #       - --innodb_initialized
-  #     interval: 20s
-  #     timeout: 3s
-  #     retries: 5
-  #   networks:
-  #     - wallabag
-
-  # wallabag-redis:
-  #   image: redis:alpine
-  #   restart: unless-stopped
-  #   healthcheck:
-  #     test:
-  #       - CMD
-  #       - redis-cli
-  #       - ping
-  #     interval: 20s
-  #     timeout: 3s
-  #     retries: 5
-  #   networks:
-  #     - wallabag
   readeck:
     image: codeberg.org/readeck/readeck:latest
     # container_name: readeck
@@ -198,6 +86,7 @@ services:
       interval: 30s
       timeout: 2s
       retries: 3
+
   forgejo:
     image: codeberg.org/forgejo/forgejo:16
     # container_name: forgejo
@@ -214,20 +103,7 @@ services:
     ports:
       - "3000:3000"
       - "2222:22"
-  # clipcascade:
-  #   image: sathvikrao/clipcascade:latest
-  #   # ports:
-  #   #   - "3000:8080"  # Expose the ClipCascade server on port 8080
-  #   restart: always  # Automatically restart the container if it stops
-  #   volumes:
-  #     - ${SERVER_DATA}/cc_users:/database  # Persistent storage for user data
-  #   environment:
-  #     - CC_MAX_MESSAGE_SIZE_IN_MiB=1   # Maximum message size in MiB (ignored if P2P mode is enabled)
-  #     - CC_P2P_ENABLED=true  # Enables or disables peer-to-peer(P2P) mode
-  #     # - CC_ALLOWED_ORIGINS=https://clipcascade.example.com  # Defines allowed CORS origins for security
-  #     # - CC_SIGNUP_ENABLED=false  # Enables or disables user self-registration
-  #   networks:
-  #     - cloudflare-public
+
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
