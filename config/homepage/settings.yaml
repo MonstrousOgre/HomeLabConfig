@@ -17,7 +17,7 @@ logpath: /logs
 # cardBlur: xs # xs, md, etc... see https://tailwindcss.com/docs/backdrop-blur
 #
 background:
-  image: https://raw.githubusercontent.com/MonstrousOgre/dotfiles/refs/heads/master/.local/share/wallpapers/wallhaven-ml1vm1.jpg
+  image: https://raw.githubusercontent.com/MonstrousOgre/dotfiles/refs/heads/master/.local/share/wallpapers/wallhaven-yqg6r7.jpg
   blur: sm # sm, "", md, xl... see https://tailwindcss.com/docs/backdrop-blur
   saturate: 70 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
   brightness: 60 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
