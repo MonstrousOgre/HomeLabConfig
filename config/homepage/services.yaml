@@ -11,6 +11,10 @@
         href: https://read.kashlab.net/
         description: Allows you to save articles and read them later
 
+    - Library:
+        href: https://library.kashlab.net/
+        description: Digital library for the Kash Lab
+
 - Private Services:
     - Git:
         href: https://git.kashlab.net:8443/
