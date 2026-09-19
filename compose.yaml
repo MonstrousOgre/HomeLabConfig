@@ -172,6 +172,7 @@ services:
     command: >
       mount r2:my-digital-library /data
       --allow-other
+      --allow-non-empty
       --vfs-cache-mode full
       --vfs-cache-max-size 10G
       --vfs-read-chunk-size 16M
