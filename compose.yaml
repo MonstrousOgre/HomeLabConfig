@@ -117,22 +117,22 @@ services:
       - cloudflare-public
     environment:
       HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS} # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
-  stump:
-    image: aaronleopold/stump:latest
-    container_name: stump
-    environment:
-      PUID: 1000
-      PGID: 1000
-      STUMP_CONFIG_DIR: /config
-
-      STUMP_ENABLE_UPLOAD: true
-
-    volumes:
-      - ${SERVER_DATA}/stump:/config
-      - ${SERVER_RESOURCES}/library:/data
-    networks:
-      - cloudflare-public
-    restart: unless-stopped
+  # stump:
+  #   image: aaronleopold/stump:latest
+  #   container_name: stump
+  #   environment:
+  #     PUID: 1000
+  #     PGID: 1000
+  #     STUMP_CONFIG_DIR: /config
+  #
+  #     STUMP_ENABLE_UPLOAD: true
+  #
+  #   volumes:
+  #     - ${SERVER_DATA}/stump:/config
+  #     - ${SERVER_RESOURCES}/library:/data
+  #   networks:
+  #     - cloudflare-public
+  #   restart: unless-stopped
   # calibre-web:
   #   image: lscr.io/linuxserver/calibre-web:latest
   #   container_name: calibre-web
@@ -151,6 +151,8 @@ services:
   #   networks:
   #     - cloudflare-public
   #   restart: unless-stopped
+
+  # 1. Rclone mount to Cloudflare R2
   rclone-r2:
     image: rclone/rclone:latest
     container_name: rclone-r2
@@ -180,6 +182,30 @@ services:
       --dir-cache-time 72h
       --attr-timeout 72h
 
+  # 2. Audiobookshelf
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    restart: unless-stopped
+    depends_on:
+      - rclone-r2
+    environment:
+      - TZ=Etc/UTC
+      # Low-memory SQLite tweaks to reduce memory overhead
+      - SQLITE_CACHE_SIZE=-2000 # Restricts SQLite cache to ~2 MB
+    deploy:
+      resources:
+        limits:
+          memory: 250M # Hard cap to protect low-RAM server environments
+    volumes:
+      # Application database & settings (MUST remain on local fast storage)
+      - ${SERVER_DATA}/audiobookshelf/config:/config
+      # Cache, covers, downloads, & backups (Kept local for fast UI rendering)
+      - ${SERVER_DATA}/audiobookshelf/metadata:/metadata
+      # R2 Mounted Library (E-books, Comics, Audiobooks stored on R2)
+      - ${SERVER_RESOURCES}/library:/library:slave
+    networks:
+      - cloudflare-public
 networks:
   karakeep:
     name: karakeep
