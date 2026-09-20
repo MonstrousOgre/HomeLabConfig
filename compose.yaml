@@ -182,30 +182,55 @@ services:
       --dir-cache-time 72h
       --attr-timeout 72h
 
-  # 2. Audiobookshelf
-  audiobookshelf:
-    image: ghcr.io/advplyr/audiobookshelf:latest
-    container_name: audiobookshelf
+  # 2. BookOrbit PostgreSQL Database
+  bookorbit-db:
+    image: pgvector/pgvector:pg16
+    container_name: bookorbit-db
     restart: unless-stopped
-    depends_on:
-      - rclone-r2
     environment:
-      - TZ=Etc/UTC
-      # Low-memory SQLite tweaks to reduce memory overhead
-      - SQLITE_CACHE_SIZE=-2000 # Restricts SQLite cache to ~2 MB
+      - POSTGRES_USER=${BOOKORBIT_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${BOOKORBIT_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${BOOKORBIT_POSTGRES_DB}
+    volumes:
+      - ${SERVER_DATA}/bookorbit/postgres:/var/lib/postgresql/data
     deploy:
       resources:
         limits:
-          memory: 250M # Hard cap to protect low-RAM server environments
-    volumes:
-      # Application database & settings (MUST remain on local fast storage)
-      - ${SERVER_DATA}/audiobookshelf/config:/config
-      # Cache, covers, downloads, & backups (Kept local for fast UI rendering)
-      - ${SERVER_DATA}/audiobookshelf/metadata:/metadata
-      # R2 Mounted Library (E-books, Comics, Audiobooks stored on R2)
-      - ${SERVER_RESOURCES}/library:/library:slave
+          memory: 200M # Strictly caps Postgres memory usage on small hosts
     networks:
       - cloudflare-public
+
+  # 3. BookOrbit Application
+  bookorbit:
+    image: ghcr.io/bookorbit/bookorbit:latest
+    container_name: bookorbit
+    restart: unless-stopped
+    depends_on:
+      - rclone-r2
+      - bookorbit-db
+    environment:
+      - APP_URL=${BOOKORBIT_APP_URL}
+      - POSTGRES_HOST=bookorbit-db
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=${BOOKORBIT_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${BOOKORBIT_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${BOOKORBIT_POSTGRES_DB}
+      - JWT_SECRET=${BOOKORBIT_JWT_SECRET}
+      - SETUP_BOOTSTRAP_TOKEN=${BOOKORBIT_SETUP_BOOTSTRAP_TOKEN}
+      - NODE_MAX_OLD_SPACE_SIZE=512 # Limits Node.js heap allocation
+      - PUID=1000
+      - PGID=1000
+      - LIBRARY_BROWSE_ROOT=/books # Constrains file picker scope inside container
+    volumes:
+      - ${SERVER_DATA}/bookorbit/app:/data
+      - ${SERVER_RESOURCES}/library:/books:slave # R2 Mounted Storage
+    deploy:
+      resources:
+        limits:
+          memory: 350M # Hard cap to prevent crashing your server
+    networks:
+      - cloudflare-public
+
 networks:
   karakeep:
     name: karakeep
