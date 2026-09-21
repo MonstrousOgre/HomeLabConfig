@@ -46,4 +46,4 @@
         description: Docker container management for the Kash Lab
         container: portainer # Monitors Portainer container health
         target: _blank
-        siteMonitor: https://portainer:9000 # Internal Docker HTTP port (or 9443 for HTTPS)
+        siteMonitor: http://portainer:9000 # Internal Docker HTTP port (or 9443 for HTTPS)
