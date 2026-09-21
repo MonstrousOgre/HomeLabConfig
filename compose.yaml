@@ -117,40 +117,22 @@ services:
       - cloudflare-public
     environment:
       HOMEPAGE_ALLOWED_HOSTS: ${HOMEPAGE_ALLOWED_HOSTS} # required, may need port. See gethomepage.dev/installation/#homepage_allowed_hosts
-  # stump:
-  #   image: aaronleopold/stump:latest
-  #   container_name: stump
-  #   environment:
-  #     PUID: 1000
-  #     PGID: 1000
-  #     STUMP_CONFIG_DIR: /config
-  #
-  #     STUMP_ENABLE_UPLOAD: true
-  #
-  #   volumes:
-  #     - ${SERVER_DATA}/stump:/config
-  #     - ${SERVER_RESOURCES}/library:/data
-  #   networks:
-  #     - cloudflare-public
-  #   restart: unless-stopped
-  # calibre-web:
-  #   image: lscr.io/linuxserver/calibre-web:latest
-  #   container_name: calibre-web
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Etc/UTC
-  #     # - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
-  #     - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
-  #   volumes:
-  #     - ${SERVER_DATA}/calibre-web/config:/config
-  #     - ${SERVER_DATA}/calibre-web/library:/books
-  #     - ${SERVER_RESOURCES}/library:/library
-  #   # ports:
-  #   #   - 8083:8083
-  #   networks:
-  #     - cloudflare-public
-  #   restart: unless-stopped
+
+  vikunja:
+    image: vikunja/vikunja
+    environment:
+      VIKUNJA_SERVICE_PUBLICURL: ${VIKUNJA_SERVICE_PUBLICURL}
+      VIKUNJA_SERVICE_SECRET: ${VIKUNJA_SERVICE_SECRET}
+      # The official image already presets this to /db/vikunja.db; it is shown
+      # explicitly here so the database file lives in the ./db volume below and
+      # state is persisted even if the container is destroyed.
+      VIKUNJA_DATABASE_PATH: /db/vikunja.db
+    # ports:
+    #   - 3456:3456
+    volumes:
+      - ${SERVER_DATA}/files:/app/vikunja/files
+      - ${SERVER_DATA}/db:/db
+    restart: unless-stopped
 
   # 1. Rclone mount to Cloudflare R2
   rclone-r2:
