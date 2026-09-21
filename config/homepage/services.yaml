@@ -18,7 +18,7 @@
         target: _blank
 
     - Library:
-        icon: mdi-book-open-page-variant # Material Design Icon (or standard book icon)
+        icon: sh-bookorbit.png # Native BookOrbit icon via selfh.st
         href: https://library.kashlab.net/
         description: Digital library catalog
         container: bookorbit
@@ -35,14 +35,15 @@
     - Git:
         icon: forgejo.png # Built-in Forgejo icon
         href: https://git.kashlab.net:8443/
-        description: Private self-hosted Git forge (Tailscale)
+        description: Private self-hosted Git forge
         container: forgejo
         target: _blank
-        siteMonitor: https://git.kashlab.net:8443/ # Shows HTTP latency (ms)
+        siteMonitor: http://forgejo:3000 # Shows HTTP latency (ms)
 
     - Container Management:
         icon: portainer.png # Built-in Portainer icon
-        href: https://portainer.kashlab.net:9443/ # Or your Tailscale URL/IP
-        description: Infrastructure & Docker container management
+        href: https://services.kashlab.net:9443/ # Or your Tailscale URL/IP
+        description: Docker container management for the Kash Lab
         container: portainer # Monitors Portainer container health
         target: _blank
+        siteMonitor: https://portainer:9000 # Internal Docker HTTP port (or 9443 for HTTPS)
