@@ -129,6 +129,8 @@ services:
       VIKUNJA_DATABASE_PATH: /db/vikunja.db
     # ports:
     #   - 3456:3456
+    networks:
+      - cloudflare-public
     volumes:
       - ${SERVER_DATA}/files:/app/vikunja/files
       - ${SERVER_DATA}/db:/db
