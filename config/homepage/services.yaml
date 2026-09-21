@@ -21,7 +21,7 @@
         icon: mdi-book-open-page-variant # Material Design Icon (or standard book icon)
         href: https://library.kashlab.net/
         description: Digital library catalog
-        container: calibre-web
+        container: bookorbit
         target: _blank
 
     - Task Manager:
