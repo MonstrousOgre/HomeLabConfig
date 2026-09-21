@@ -39,3 +39,10 @@
         container: forgejo
         target: _blank
         siteMonitor: https://git.kashlab.net:8443/ # Shows HTTP latency (ms)
+
+    - Container Management:
+        icon: portainer.png # Built-in Portainer icon
+        href: https://portainer.kashlab.net:9443/ # Or your Tailscale URL/IP
+        description: Infrastructure & Docker container management
+        container: portainer # Monitors Portainer container health
+        target: _blank
