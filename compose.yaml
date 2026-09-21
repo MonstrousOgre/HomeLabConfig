@@ -123,10 +123,8 @@ services:
     environment:
       VIKUNJA_SERVICE_PUBLICURL: ${VIKUNJA_SERVICE_PUBLICURL}
       VIKUNJA_SERVICE_SECRET: ${VIKUNJA_SERVICE_SECRET}
-      # The official image already presets this to /db/vikunja.db; it is shown
-      # explicitly here so the database file lives in the ./db volume below and
-      # state is persisted even if the container is destroyed.
       VIKUNJA_DATABASE_PATH: /db/vikunja.db
+      VIKUNJA_SERVICE_ENABLEREGISTRATION: false
     # ports:
     #   - 3456:3456
     networks:
