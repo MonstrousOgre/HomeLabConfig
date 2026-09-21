@@ -4,18 +4,38 @@
 
 - Public Services:
     - Bookmarks:
+        icon: linkding.png # Built-in LinkDing icon
         href: https://bookmarks.kashlab.net/
-        description: Bookmark manager for the Kash Lab
+        description: Bookmark manager & reference saver
+        container: linkding # Live Docker status indicator
+        target: _blank
 
     - Read-it-later:
+        icon: readeck.png # Built-in Readeck icon
         href: https://read.kashlab.net/
-        description: Allows you to save articles and read them later
+        description: Article archive & OPDS feed provider
+        container: readeck
+        target: _blank
 
     - Library:
+        icon: mdi-book-open-page-variant # Material Design Icon (or standard book icon)
         href: https://library.kashlab.net/
-        description: Digital library for the Kash Lab
+        description: Digital library catalog
+        container: calibre-web
+        target: _blank
+
+    - Task Manager:
+        icon: vikunja.png # Built-in Vikunja icon
+        href: https://tasks.kashlab.net/
+        description: Task management, time-slots & scheduling
+        container: vikunja
+        target: _blank
 
 - Private Services:
     - Git:
+        icon: forgejo.png # Built-in Forgejo icon
         href: https://git.kashlab.net:8443/
-        description: Git forge for the Kash Lab
+        description: Private self-hosted Git forge (Tailscale)
+        container: forgejo
+        target: _blank
+        siteMonitor: https://git.kashlab.net:8443/ # Shows HTTP latency (ms)
