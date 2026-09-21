@@ -132,8 +132,8 @@ services:
     networks:
       - cloudflare-public
     volumes:
-      - ${SERVER_DATA}/files:/app/vikunja/files
-      - ${SERVER_DATA}/db:/db
+      - ${SERVER_DATA}/vikunja/files:/app/vikunja/files
+      - ${SERVER_DATA}/vikunja/db:/db
     restart: unless-stopped
 
   # 1. Rclone mount to Cloudflare R2
