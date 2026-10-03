@@ -3,7 +3,7 @@
 }
 
 http://*.kashlab.net {
-	redir https://{host}:8443{uri} permanent
+	redir https://{host}{uri} permanent
 }
 
 git.kashlab.net {

@@ -34,7 +34,7 @@
 - Private Services:
     - Git:
         icon: forgejo.png # Built-in Forgejo icon
-        href: https://git.kashlab.net:8443/
+        href: https://git.kashlab.net/
         description: Private self-hosted Git forge
         container: forgejo
         target: _blank
@@ -42,7 +42,7 @@
 
     - Container Management:
         icon: portainer.png # Built-in Portainer icon
-        href: https://services.kashlab.net:8443/ # Or your Tailscale URL/IP
+        href: https://services.kashlab.net/ # Or your Tailscale URL/IP
         description: Docker container management for the Kash Lab
         container: portainer # Monitors Portainer container health
         target: _blank
