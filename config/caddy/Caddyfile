@@ -20,3 +20,9 @@ services.kashlab.net {
 	reverse_proxy portainer:9000
 }
 
+notes.kashlab.net {
+	tls {
+		dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+	}
+	reverse_proxy trilium:8080 
+}

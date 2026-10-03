@@ -32,6 +32,13 @@
         target: _blank
 
 - Private Services:
+    - Notes:
+        icon: sh-trilium.png # Built-in Notes icon
+        href: https://notes.kashlab.net/
+        description: Knowledge base & note workspace
+        container: notes
+        target: _blank
+        siteMonitor: http://trilium:8080 # Shows HTTP latency (ms)
     - Git:
         icon: forgejo.png # Built-in Forgejo icon
         href: https://git.kashlab.net/
