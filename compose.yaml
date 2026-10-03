@@ -217,6 +217,7 @@ services:
       - cloudflare-public
   trilium:
     image: triliumnext/trilium:latest
+    container_name: trilium
     restart: unless-stopped
     environment:
       # Set your timezone here (e.g., America/New_York, Europe/London, Asia/Kolkata, UTC)
