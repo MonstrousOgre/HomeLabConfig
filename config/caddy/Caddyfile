@@ -27,9 +27,3 @@ notes.kashlab.net {
 	reverse_proxy trilium:8080 
 }
 
-jobs.kashlab.net {
-	tls {
-		dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-	}
-	reverse_proxy jobsync:3737 
-}
