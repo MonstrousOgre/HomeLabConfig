@@ -254,7 +254,7 @@ services:
       retries: 3
       start_period: 30s
     networks:
-      - cloudflare-public
+      - caddy-private
 
 networks:
   cloudflare-public:
