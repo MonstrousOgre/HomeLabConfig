@@ -240,6 +240,7 @@ services:
       - AUTH_SECRET=${JOBSYNC_AUTH_SECRET}
       - ENCRYPTION_KEY=${JOBSYNC_ENCRYPTION_KEY}
       - NEXTAUTH_URL=${JOBSYNC_NEXTAUTH_URL:-http://localhost:3737}
+      - AUTH_TRUST_HOST=true
       - TZ=UTC
     volumes:
       - ${SERVER_DATA}/jobsync/data:/data
