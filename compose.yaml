@@ -236,6 +236,7 @@ services:
     #   - "3737:3737"
     environment:
       - MCP_ENABLED=true
+      - DATABASE_URL=file:/data/dev.db
       - AUTH_SECRET=${JOBSYNC_AUTH_SECRET}
       - ENCRYPTION_KEY=${JOBSYNC_ENCRYPTION_KEY}
       - NEXTAUTH_URL=${JOBSYNC_NEXTAUTH_URL:-http://localhost:3737}
