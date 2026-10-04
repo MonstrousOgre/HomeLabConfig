@@ -229,6 +229,31 @@ services:
     volumes:
       - ${SERVER_DATA}/trilium-data:/home/node/trilium-data
 
+  jobsync:
+    image: ghcr.io/gsync/jobsync:latest
+    container_name: jobsync
+    # ports:
+    #   - "3737:3737"
+    environment:
+      - MCP_ENABLED=true
+      - AUTH_SECRET=${JOBSYNC_AUTH_SECRET}
+      - ENCRYPTION_KEY=${JOBSYNC_ENCRYPTION_KEY}
+      - NEXTAUTH_URL=${JOBSYNC_NEXTAUTH_URL:-http://localhost:3737}
+      - TZ=UTC
+    volumes:
+      - ${SERVER_DATA}/jobsync/data:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:3737"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - cloudflare-public
+
 networks:
   cloudflare-public:
     name: cloudflare-public
