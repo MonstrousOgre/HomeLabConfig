@@ -31,5 +31,5 @@ jobs.kashlab.net {
 	tls {
 		dns cloudflare {env.CLOUDFLARE_API_TOKEN}
 	}
-	reverse_proxy jobsync:8080 
+	reverse_proxy jobsync:3737 
 }
