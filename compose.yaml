@@ -226,6 +226,7 @@ services:
     #   - "8080:8080"
     networks:
       - cloudflare-public
+      - caddy-private
     volumes:
       - ${SERVER_DATA}/trilium-data:/home/node/trilium-data
 
