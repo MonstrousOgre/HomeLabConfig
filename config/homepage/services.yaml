@@ -33,7 +33,7 @@
 
 - Private Services:
     - Notes:
-        icon: sh-trilium.png
+        icon: sh-trilium-notes.png
         href: https://notes.kashlab.net/
         description: Knowledge base & note workspace
         container: trilium
